@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const api = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? 'https://mandos-r-awesome.herokuapp.com/' : 'http://localhost:3000'
+  baseURL: process.env.NODE_ENV === 'production' ? 'https://bobby-food-app.herokuapp.com/' : 'http://localhost:3000'
 });
 
 // ====================================
