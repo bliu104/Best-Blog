@@ -27255,3 +27255,239 @@ FOREIGN KEY ("user_id")
   [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "b1959b00ad161457eb4c4e45036a5dfa29fe84ae"], ["created_at", "2020-04-10 19:37:23.532960"], ["updated_at", "2020-04-10 19:37:23.532960"]]
   [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (55.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Food_Blog_development"[0m
+  [1m[35m (43.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "Food_Blog_test"[0m
+  [1m[35m (226.3ms)[0m  [1m[35mCREATE DATABASE "Food_Blog_development" ENCODING = 'unicode'[0m
+  [1m[35m (141.1ms)[0m  [1m[35mCREATE DATABASE "Food_Blog_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "comments" CASCADE[0m
+  [1m[35m (17.6ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "recipe_id" bigint NOT NULL, "user_id" bigint NOT NULL, "comment" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_recipe_id" ON "comments"  ("recipe_id")[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_user_id" ON "comments"  ("user_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "recipes" CASCADE[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "recipes" ("id" bigserial primary key, "name" character varying, "tag" character varying, "catagories" character varying, "ingredient" character varying, "how_to_make" character varying, "image" character varying, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE  INDEX  "index_recipes_on_user_id" ON "recipes"  ("user_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (5.8ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_fa790d5166"
+FOREIGN KEY ("recipe_id")
+  REFERENCES "recipes" ("id")
+[0m
+  [1m[35m (2.3ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (2.1ms)[0m  [1m[35mALTER TABLE "recipes" ADD CONSTRAINT "fk_rails_9606fce865"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (15.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200406205754)[0m
+  [1m[35m (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200406195146),
+(20200406195623),
+(20200406195811);
+
+[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-04-10 20:06:27.141326"], ["updated_at", "2020-04-10 20:06:27.141326"]]
+  [1m[35m (3.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "b1959b00ad161457eb4c4e45036a5dfa29fe84ae"], ["created_at", "2020-04-10 20:06:27.158250"], ["updated_at", "2020-04-10 20:06:27.158250"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "comments" CASCADE[0m
+  [1m[35m (12.9ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "recipe_id" bigint NOT NULL, "user_id" bigint NOT NULL, "comment" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_recipe_id" ON "comments"  ("recipe_id")[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_user_id" ON "comments"  ("user_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "recipes" CASCADE[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE "recipes" ("id" bigserial primary key, "name" character varying, "tag" character varying, "catagories" character varying, "ingredient" character varying, "how_to_make" character varying, "image" character varying, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.9ms)[0m  [1m[35mCREATE  INDEX  "index_recipes_on_user_id" ON "recipes"  ("user_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (6.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (3.3ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_fa790d5166"
+FOREIGN KEY ("recipe_id")
+  REFERENCES "recipes" ("id")
+[0m
+  [1m[35m (2.7ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (2.4ms)[0m  [1m[35mALTER TABLE "recipes" ADD CONSTRAINT "fk_rails_9606fce865"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20200406205754)[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20200406195146),
+(20200406195623),
+(20200406195811);
+
+[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-04-10 20:06:27.315598"], ["updated_at", "2020-04-10 20:06:27.315598"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.4ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2020-04-10 20:06:27.331667"], ["key", "environment"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "b1959b00ad161457eb4c4e45036a5dfa29fe84ae"], ["created_at", "2020-04-10 20:06:27.345451"], ["updated_at", "2020-04-10 20:06:27.345451"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6434383963380316020)[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(6434383963380316020)[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/Signup" for ::1 at 2020-04-10 16:11:01 -0400
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/Signup"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/" for ::1 at 2020-04-10 16:11:05 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/bobbyliu/.rbenv/versions/2.6.0/lib/ruby/gems/2.6.0/gems/railties-6.0.2.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/bobbyliu/.rbenv/versions/2.6.0/lib/ruby/gems/2.6.0/gems/railties-6.0.2.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 14.0ms | Allocations: 197)
+Completed 200 OK in 18ms (Views: 15.4ms | ActiveRecord: 0.0ms | Allocations: 872)
+
+
+Started GET "/users" for ::1 at 2020-04-10 16:11:11 -0400
+Processing by UsersController#index as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 1.0ms | ActiveRecord: 0.0ms | Allocations: 193)
+
+
+Started GET "/recipes" for ::1 at 2020-04-10 16:11:16 -0400
+Processing by RecipesController#index as HTML
+  [1m[36mRecipe Load (0.9ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/controllers/recipes_controller.rb:8:in `index'
+Completed 200 OK in 29ms (Views: 6.3ms | ActiveRecord: 5.0ms | Allocations: 3254)
+
+
+Started GET "/recipes" for ::1 at 2020-04-10 16:11:49 -0400
+Processing by RecipesController#index as HTML
+  [1m[36mRecipe Load (0.6ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/controllers/recipes_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.6ms | Allocations: 809)
+
+
+Started GET "/recipes/11" for ::1 at 2020-04-10 16:11:53 -0400
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mRecipe Load (0.5ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:45:in `set_recipe'
+Completed 404 Not Found in 21ms (ActiveRecord: 6.8ms | Allocations: 2301)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Recipe with 'id'=11):
+  
+app/controllers/recipes_controller.rb:45:in `set_recipe'
+Started GET "/recipes" for ::1 at 2020-04-10 16:11:56 -0400
+Processing by RecipesController#index as HTML
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/controllers/recipes_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.4ms | Allocations: 793)
+
+
+Started GET "/recipes" for ::1 at 2020-04-10 16:11:57 -0400
+Processing by RecipesController#index as HTML
+  [1m[36mRecipe Load (0.6ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/controllers/recipes_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.6ms | Allocations: 790)
+
+
+Started GET "/recipes" for ::1 at 2020-04-10 16:11:58 -0400
+Processing by RecipesController#index as HTML
+  [1m[36mRecipe Load (0.8ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/controllers/recipes_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.8ms | Allocations: 804)
+
+
+Started POST "/users/" for ::1 at 2020-04-10 16:12:08 -0400
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"name"=>"butts", "email"=>"poopy@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:21:in `create'
+  [1m[36mUser Create (1.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "butts"], ["email", "poopy@gmail.com"], ["password_digest", "$2a$12$F0i0/1m2Pmj8mjRQ7tF7vexWAYb/db3ishFkqmegoKLjCP4QJ7Y5a"], ["created_at", "2020-04-10 20:12:08.678464"], ["updated_at", "2020-04-10 20:12:08.678464"]]
+  ↳ app/controllers/users_controller.rb:21:in `create'
+  [1m[35m (3.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:21:in `create'
+Completed 201 Created in 408ms (Views: 1.5ms | ActiveRecord: 9.7ms | Allocations: 6871)
+
+
+Started GET "/recipes" for ::1 at 2020-04-10 16:12:29 -0400
+Processing by RecipesController#index as HTML
+  [1m[36mRecipe Load (9.0ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/controllers/recipes_controller.rb:8:in `index'
+Completed 200 OK in 11ms (Views: 2.0ms | ActiveRecord: 9.0ms | Allocations: 791)
+
+
+Started POST "/recipes" for ::1 at 2020-04-10 16:12:51 -0400
+Processing by RecipesController#create as HTML
+  Parameters: {"recipe"=>{"name"=>"PBJ", "tag"=>"Quick Food", "catagories"=>"Snack", "ingredient"=>"Bread, peanutbutter, jelly", "how_to_make"=>"Put peanut butter on bread, Put jelly on bread, put bread on other bread", "image"=>"https://www.landolakes.com/RecipeManagementSystem/media/Recipe-Media-Files/Recipes/Retail/DesktopImages/2018_Grilled-Peanut-Butter-and-Jelly_20336_600x600.jpg?ext=.jpg", "user_id"=>"1"}}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/recipes_controller.rb:20:in `create'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/recipes_controller.rb:20:in `create'
+  [1m[36mRecipe Create (1.7ms)[0m  [1m[32mINSERT INTO "recipes" ("name", "tag", "catagories", "ingredient", "how_to_make", "image", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "PBJ"], ["tag", "Quick Food"], ["catagories", "Snack"], ["ingredient", "Bread, peanutbutter, jelly"], ["how_to_make", "Put peanut butter on bread, Put jelly on bread, put bread on other bread"], ["image", "https://www.landolakes.com/RecipeManagementSystem/media/Recipe-Media-Files/Recipes/Retail/DesktopImages/2018_Grilled-Peanut-Butter-and-Jelly_20336_600x600.jpg?ext=.jpg"], ["user_id", 1], ["created_at", "2020-04-10 20:12:51.726125"], ["updated_at", "2020-04-10 20:12:51.726125"]]
+  ↳ app/controllers/recipes_controller.rb:20:in `create'
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/recipes_controller.rb:20:in `create'
+Completed 201 Created in 68ms (Views: 1.3ms | ActiveRecord: 3.7ms | Allocations: 11939)
+
+
+Started GET "/recipes" for ::1 at 2020-04-10 16:12:51 -0400
+Processing by RecipesController#index as HTML
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/controllers/recipes_controller.rb:8:in `index'
+Completed 200 OK in 2ms (Views: 1.5ms | ActiveRecord: 0.4ms | Allocations: 989)
+
+
+Started GET "/recipes" for ::1 at 2020-04-10 16:12:56 -0400
+Processing by RecipesController#index as HTML
+  [1m[36mRecipe Load (0.5ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  ↳ app/controllers/recipes_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.5ms | Allocations: 981)
+
+
