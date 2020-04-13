@@ -1,15 +1,26 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 import { render } from '@testing-library/react';
 
 
 class Signin extends Component {
   constructor(props) {
     super(props)
-
   }
-  render() {
 
+  // button = () => {
+  //   if (true) {
+  //     return <Redirect
+  //       to="/"
+  //     />
+  //   }
+  // }
+
+
+  render() {
+    const { history } = this.props
+    console.log(this.props)
     return (
       <div className="auth-container">
         <h2>login</h2>
@@ -23,7 +34,7 @@ class Signin extends Component {
           <p>Password:</p>
           <input name="password" type="password" value={this.props.formData.password} onChange={this.props.handleChange} />
           <hr />
-          <button>Login</button>
+          <button onClick={() => { return history.push(`/`) }}>Login</button>
           <Link to="/Signup">Register</Link>
         </form>
       </div>

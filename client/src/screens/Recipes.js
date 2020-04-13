@@ -2,14 +2,33 @@ import React, { Component } from 'react'
 import { showRecipe } from '../services/api-helper'
 import Recipecard from '../components/Recipecard'
 import Filternav from '../screens/Filternav'
+import { filterTags } from '../components/FilterCat'
 
 export default class Recipes extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      recipes: []
+      recipes: [],
+      input: ''
     }
 
+
+  }
+
+  async componentDidMount() {
+    let recipes = await showRecipe()
+    // recipes = filterTags(recipes, this.route_ends())
+    const endpoint = this.route_ends()
+    console.log(this.props)
+    if (endpoint !== "") {
+      recipes = filterTags(recipes, this.route_ends())
+    }
+    this.setState({ recipes })
+  }
+
+  route_ends = () => {
+    const results = this.props.location.search.split("=").pop();
+    return results
   }
 
   createRecipeButton = () => {
@@ -19,9 +38,13 @@ export default class Recipes extends Component {
     )
   }
 
-  async componentDidMount() {
-    this.setState({ recipes: await showRecipe() })
+  filter = () => {
+    const { recipes, input } = this.state
+    const filteredArray = (filterTags(recipes, input))
+    this.setState({ recipes: filteredArray })
   }
+
+
 
   card = () => {
     const { history, match } = this.props;
@@ -43,10 +66,33 @@ export default class Recipes extends Component {
     })
   }
 
+  // handleChangeSearch = (event) => {
+  //   this.setState({ input: event.target.value })
+  // }
+
+  // handleSubmitSearch = (event) => {
+  //   event.preventDefault()
+  // }
+
+  // click = () => {
+  //   const { history } = this.props
+  //   return history.push(`/Search`)
+  // }
+
   render() {
     return (
       <>
         <Filternav />
+        <div>
+          <form onSubmit={this.props.handleSubmitSearch}>
+            <input type="text"
+              name='input'
+              value={this.props.input}
+              onChange={this.props.handleChangeSearch} />
+          </form>
+        </div>
+        {/* <Searchbar handleChangeSearch={this.handleChangeSearch} handleSubmitSearch={this.handleSubmitSearch} input={this.state.input} /> */}
+        {/* <button onClick={this.filter, this.click}>Search</button> */}
         < div className='Card_Container' >
           {this.card()}
           {this.createRecipeButton()}

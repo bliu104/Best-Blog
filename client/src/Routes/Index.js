@@ -21,7 +21,8 @@ export default class Index extends Component {
         password: ""
 
       },
-      deletedrecipe: false
+      deletedrecipe: false,
+      input: ''
     }
   }
 
@@ -42,10 +43,11 @@ export default class Index extends Component {
     }));
   }
 
+
   render() {
     return (
       <div>
-        <Switch>
+        <Switch >
           <Route
             exact
             path="/"
@@ -70,7 +72,8 @@ export default class Index extends Component {
             <Signin
               handleLogin={this.handleLogin}
               handleChange={this.authHandleChange}
-              formData={this.state.authFormData} />)} />
+              formData={this.state.authFormData} />)}
+          />
           <Route
             exact
             path="/Signup"
