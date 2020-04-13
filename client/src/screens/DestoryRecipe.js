@@ -10,7 +10,16 @@ export default class DestoryRecipe extends Component {
     }
 
   }
+  destoryRecipeButton = () => {
+    const { match } = this.props;
+    return <button onClick={async () => {
+      await destroyRecipe(match.params.id)
+      this.setState({ deleted: true })
+    }
+    } > Delete
+     </button >
 
+  }
 
   render() {
     const { deleted } = this.state

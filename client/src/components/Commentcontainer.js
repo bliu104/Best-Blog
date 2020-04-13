@@ -16,7 +16,7 @@ export default class Commentcontainer extends Component {
       comment: "",
       deletedComment: false
     }
-    console.log(this.props.recipe_id.id)
+    console.log(this.props)
 
   }
 
@@ -28,13 +28,13 @@ export default class Commentcontainer extends Component {
   //   console.log(this.state.comment.id)
   // }
 
-  // destroy = () => {
+  // destroy = (comment_id) => {
 
   //   return (
 
   //     <button onClick={async () => {
 
-  //       await destroycomment(this.props.id, this.state.comment.id)
+  //       await destroycomment(this.props.id, comment_id)
   //       this.setState({ deleted: true, })
   //     }} style={{ borderRadius: "5px" }}>
   //       <MdDeleteForever style={{ fontSize: "20px" }} /></button>
@@ -51,6 +51,7 @@ export default class Commentcontainer extends Component {
             <hr />
             <div className="CommentDelete">
               <div>{comment.comment}</div>
+              {this.props.destroy(comment.id)}
               {/* <Destorycomment recipe_id={this.props.recipe_id.id} comment_id={comment.id} delete={this.state.deletedComment} destroy={this.destroy} /> */}
             </div>
           </>)

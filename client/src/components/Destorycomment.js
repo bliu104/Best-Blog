@@ -40,7 +40,7 @@ export default class Destorycomment extends Component {
     }
     return (
       <div>
-        {this.destroy()}
+
       </div>
     )
   }

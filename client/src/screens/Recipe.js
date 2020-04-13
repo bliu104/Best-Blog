@@ -7,6 +7,7 @@ import { FiEdit2 } from 'react-icons/fi';
 import { MdDeleteForever } from 'react-icons/md';
 
 
+
 export default class Recipe extends Component {
   constructor(props) {
     super(props)
@@ -35,16 +36,16 @@ export default class Recipe extends Component {
     }
   }
 
-  destroy = () => {
+  destroy = (comment_id) => {
 
     return (
 
       <button onClick={async () => {
 
-        await destroycomment(this.state.recipe.id, this.props.comment_id)
+        await destroycomment(this.state.recipe.id, comment_id)
+        this.getComments()
       }} style={{ borderRadius: "5px" }}>
         <MdDeleteForever style={{ fontSize: "20px" }} /></button>
-
     )
   }
 
@@ -52,6 +53,7 @@ export default class Recipe extends Component {
     // console.log(this.state.recipe.id)
     const comments = await showcomments(this.state.recipe.id);
     this.setState({ comments: comments })
+    console.log(comments)
   }
 
   handler = async (e) => {
@@ -61,6 +63,7 @@ export default class Recipe extends Component {
     this.setState(prevState => ({
       comments: [...prevState.comments, newComment]
     }))
+
   }
 
   handleChange = (e) => {
@@ -127,7 +130,7 @@ export default class Recipe extends Component {
 
   passingCommentcontainer = () => {
     if (this.state.recipe) {
-      return <Commentcontainer id={this.props.match.params.id} handleChange={this.handleChange} handler={this.handler} recipe_id={this.state.recipe} comment={this.state.comments} createComment={this.state.createComment} />
+      return <Commentcontainer id={this.props.match.params.id} handleChange={this.handleChange} handler={this.handler} recipe_id={this.state.recipe} comment={this.state.comments} createComment={this.state.createComment} destroy={this.destroy} />
     }
   }
   render() {

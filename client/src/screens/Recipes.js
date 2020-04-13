@@ -12,15 +12,6 @@ export default class Recipes extends Component {
 
   }
 
-  // renderButton = id => {
-  //   const { history, match } = this.props;
-  //   return (
-  //     <button onClick={() => history.push(`${match.url}/${id}`)}>
-  //       See More
-  //     </button>
-  //   )
-  // };
-
   createRecipeButton = () => {
     const { history, match } = this.props;
     return (
