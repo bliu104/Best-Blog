@@ -8,7 +8,7 @@ import Signup from '../screens/Signup'
 import Createrecipe from "../screens/Createrecipe"
 import EditRecipe from '../screens/EditRecipe'
 import DestoryRecipe from '../screens/DestoryRecipe'
-import { loginUser } from '../services/api-helper'
+import { loginUser, verifyUser } from '../services/api-helper'
 import FilterRecipe from "../screens/FilterRecipe"
 
 
@@ -21,11 +21,22 @@ export default class Index extends Component {
         password: ""
 
       },
-      deletedrecipe: false
+      currentUser: null,
+      deletedrecipe: false,
+      input: ''
     }
   }
 
+  componentDidMount = () => {
+    this.handleVerify();
+  }
 
+  handleVerify = async () => {
+    const currentUser = await verifyUser();
+    if (currentUser) {
+      this.setState({ currentUser })
+    }
+  }
 
   handleLogin = async () => {
     const currentUser = await loginUser(this.state.authFormData);
@@ -42,14 +53,16 @@ export default class Index extends Component {
     }));
   }
 
+
   render() {
+    const { currentUser } = this.state
     return (
       <div>
-        <Switch>
+        <Switch >
           <Route
             exact
             path="/"
-            render={props => <Home />}
+            render={props => <Home {...props} currentUser={currentUser} />}
           />
           <Route
             exact
@@ -64,13 +77,14 @@ export default class Index extends Component {
           <Route
             exact
             path="/recipes/:id"
-            render={props => <Recipe {...props} />}
+            render={props => <Recipe {...props} currentUser={this.state.currentUser} />}
           />
           <Route exact path="/Signin" render={() => (
             <Signin
               handleLogin={this.handleLogin}
               handleChange={this.authHandleChange}
-              formData={this.state.authFormData} />)} />
+              formData={this.state.authFormData} />)}
+          />
           <Route
             exact
             path="/Signup"
@@ -79,7 +93,7 @@ export default class Index extends Component {
           <Route
             exact
             path="/recipes/:id/EditRecipe"
-            render={props => <EditRecipe {...props} />}
+            render={props => <EditRecipe {...props} currentUser={this.state.currentUser} />}
           />
           <Route
             exact

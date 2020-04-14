@@ -2,14 +2,32 @@ import React, { Component } from 'react'
 import { showRecipe } from '../services/api-helper'
 import Recipecard from '../components/Recipecard'
 import Filternav from '../screens/Filternav'
+import { filterTags } from '../components/FilterCat'
 
 export default class Recipes extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      recipes: []
+      recipes: [],
+      input: ''
     }
 
+
+  }
+
+  async componentDidMount() {
+    let recipes = await showRecipe()
+    const endpoint = this.route_ends()
+    console.log(endpoint)
+    if (endpoint !== '') {
+      recipes = filterTags(recipes, this.route_ends())
+    }
+    this.setState({ recipes })
+  }
+
+  route_ends = () => {
+    const results = this.props.location.search.split("=").pop();
+    return results
   }
 
   createRecipeButton = () => {
@@ -19,9 +37,13 @@ export default class Recipes extends Component {
     )
   }
 
-  async componentDidMount() {
-    this.setState({ recipes: await showRecipe() })
+  filter = () => {
+    const { recipes, input } = this.state
+    const filteredArray = (filterTags(recipes, input))
+    this.setState({ recipes: filteredArray })
   }
+
+
 
   card = () => {
     const { history, match } = this.props;
@@ -43,10 +65,28 @@ export default class Recipes extends Component {
     })
   }
 
+
   render() {
     return (
       <>
         <Filternav />
+        <div>
+          <form onSubmit={this.props.handleSubmitSearch} style={{ fontSize: "36px" }}>
+            Search
+            <input
+              className="SearchBar"
+              type="text"
+              name='input'
+              value={this.props.input}
+              onChange={this.props.handleChangeSearch}
+              style={{ marginLeft: "20px" }}
+            />
+          </form>
+        </div>
+
+        <div className="QuerySearchResults">
+          Current searching '{this.route_ends()}', {this.state.recipes.length} result(s)
+        </div>
         < div className='Card_Container' >
           {this.card()}
           {this.createRecipeButton()}

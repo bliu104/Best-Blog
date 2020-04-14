@@ -13,8 +13,8 @@ export default class Recipecard extends Component {
     const { card } = this.state
     return (
       <div className="Cards">
-        <div>Food: {card.name}</div>
-        <div>Catagory: {card.catagories}</div>
+        <div>{card.name}</div>
+        <div>{card.catagories}</div>
         <img src={card.image} />
       </div>
     )

@@ -20,7 +20,7 @@ export default class Recipe extends Component {
       },
       comments: []
     }
-    console.log(this.state.createComment)
+    console.log(this.props)
 
   }
 
@@ -77,10 +77,16 @@ export default class Recipe extends Component {
   }
 
   createButton = () => {
-    const { history, match } = this.props;
-    return (
-      <button onClick={() => history.push(`${match.url}/EditRecipe`)} style={{ borderRadius: "5px" }}> <FiEdit2 style={{ fontSize: "25px" }} /> </ button>
-    )
+    const { history, match, currentUser } = this.props;
+    if (currentUser !== null) {
+      return (
+        <button onClick={() => history.push(`${match.url}/EditRecipe`)} style={{ borderRadius: "5px" }}> <FiEdit2 style={{ fontSize: "25px" }} /> </ button>
+      )
+    } else {
+      return (
+        <button onClick={() => history.push(`/Signin`)} style={{ borderRadius: "5px" }}> <FiEdit2 style={{ fontSize: "25px" }} /> </ button>
+      )
+    }
   }
 
 
