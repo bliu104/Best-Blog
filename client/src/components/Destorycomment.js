@@ -9,23 +9,7 @@ export default class Destorycomment extends Component {
     this.state = {
       deleted: false
     }
-    console.log(props)
   }
-
-  // destroy = () => {
-
-  //   return (
-
-  //     <button onClick={async () => {
-
-  //       await destroycomment(this.props.recipe_id.id, this.props.comment_id)
-  //       this.setState({ deleted: true, })
-  //     }} style={{ borderRadius: "5px" }}>
-  //       <MdDeleteForever style={{ fontSize: "20px" }} /></button>
-
-  //   )
-  // }
-
   render() {
     const { deleted } = this.state
     if (deleted) {

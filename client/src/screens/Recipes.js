@@ -18,7 +18,6 @@ export default class Recipes extends Component {
   async componentDidMount() {
     let recipes = await showRecipe()
     const endpoint = this.route_ends()
-    console.log(endpoint)
     if (endpoint !== '') {
       recipes = filterTags(recipes, this.route_ends())
     }
@@ -49,8 +48,6 @@ export default class Recipes extends Component {
     const { history, match } = this.props;
 
     return this.state.recipes.map(recipe => {
-
-      console.log(match.url)
       return (
 
         <div onClick={() => history.push(`${match.url}/${recipe.id}`)} style={{ cursor: "pointer" }}>

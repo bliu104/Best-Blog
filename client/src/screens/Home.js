@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import TimeComponet from "../components/TimeComponet"
 import { showRecipe } from "../services/api-helper"
 import { filterTags } from "../components/FilterCat"
 
@@ -21,7 +20,6 @@ export default class Home extends Component {
     const time = new Date()
     let food = '';
     let times = ''
-    console.log(time.getHours())
 
     if (time.getHours() >= 22 || time.getHours() < 4) {
       food = "snack";
@@ -36,8 +34,6 @@ export default class Home extends Component {
       food = "dinner";
       times = "Evening"
     }
-
-    console.log(food)
 
     const arrayRecipe = filterTags(recipes, food)
     const { history } = this.props

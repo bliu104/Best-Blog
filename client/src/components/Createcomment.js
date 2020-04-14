@@ -15,36 +15,8 @@ export default class Createcomment extends Component {
     }
 
   }
-  // handler = async (e) => {
-  //   e.preventDefault();
-  //   const createComment = await postcomment(this.props.id, this.state.createComment);
-  //   this.setState({ createComment, created: true })
-
-  // }
-  // HandleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   this.setState(prevState => ({
-  //     createComment: {
-  //       ...prevState.createComment,
-  //       [name]: value
-  //     }
-  //   }));
-  // }
 
   render() {
-
-    // if (this.state.created) {
-    // return <Redirect
-    //   to={{
-    //     pathname: `/recipes`,
-    //     state: {
-    //       msg: "Item succesfully Created!",
-    //     }
-    //   }}
-    // />
-    // }
-
-
     const { createComment } = this.state
     return (
       <div>

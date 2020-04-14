@@ -20,8 +20,6 @@ export default class Recipe extends Component {
       },
       comments: []
     }
-    console.log(this.props)
-
   }
 
 
@@ -50,14 +48,12 @@ export default class Recipe extends Component {
   }
 
   getComments = async () => {
-    // console.log(this.state.recipe.id)
     const comments = await showcomments(this.state.recipe.id);
     this.setState({ comments: comments })
     console.log(comments)
   }
 
   handler = async (e) => {
-    console.log(this.state.recipe.id)
     e.preventDefault();
     const newComment = await postcomment(this.state.recipe.id, this.state.createComment);
     this.setState(prevState => ({
@@ -92,7 +88,6 @@ export default class Recipe extends Component {
 
   deleteButton = () => {
     const { history, match } = this.props;
-    console.log(match)
     return (<button onClick={() => history.push(`${match.url}/Delete`)} style={{ borderRadius: "5px" }} > <MdDeleteForever style={{ fontSize: "25px" }} /></ button>)
   }
 

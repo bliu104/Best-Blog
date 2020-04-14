@@ -3,8 +3,8 @@ import { postRecipe } from "../services/api-helper"
 import { Redirect } from "react-router-dom";
 
 export default class Createrecipe extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       createRecipe: {
         name: '',
@@ -13,7 +13,7 @@ export default class Createrecipe extends Component {
         ingredient: '',
         how_to_make: '',
         image: '',
-        user_id: ''
+        user_id: 1
       },
       created: false
     }
@@ -35,7 +35,9 @@ export default class Createrecipe extends Component {
     }));
   }
 
+
   render() {
+
     const { createRecipe } = this.state
     if (this.state.created) {
       return <Redirect
@@ -48,28 +50,29 @@ export default class Createrecipe extends Component {
       />
     }
     return (
+
       <div className="auth-container">
-        <h2>Register</h2>
-        <hr />
+        <h2 style={{ fontSize: "40px" }}>Create Recipes</h2>
         <form onSubmit={this.handler} >
-          <p>Name:</p>
-          <input name="name" type="text" value={createRecipe.name} onChange={this.HandleChange} />
-          <p>Tag:</p>
-          <input name="tag" type="text" value={createRecipe.tag} onChange={this.HandleChange} />
-          <p>Catagories:</p>
-          <input name="catagories" type="text" value={createRecipe.catagories} onChange={this.HandleChange} />
-          <p>Ingredients:</p>
-          <input name="ingredient" type="text" value={createRecipe.ingredient} onChange={this.HandleChange} />
-          <p>Instructions:</p>
-          <input name="how_to_make" type="text" value={createRecipe.how_to_make} onChange={this.HandleChange} />
-          <p>Image:</p>
-          <input name="image" type="text" value={createRecipe.Image} onChange={this.HandleChange} />
-          <p>User:</p>
-          <input name="user_id" type="text" value={createRecipe.user} onChange={this.HandleChange} />
-          <hr />
-          <button>Create!</button>
+          <div className="CreateRecipes">
+            <p>Name:</p>
+            <input name="name" type="text" value={createRecipe.name} onChange={this.HandleChange} />
+            <p>Tag:</p>
+            <input name="tag" type="text" value={createRecipe.tag} onChange={this.HandleChange} />
+            <p>Catagories:</p>
+            <input name="catagories" type="text" value={createRecipe.catagories} onChange={this.HandleChange} />
+            <p>Ingredients:</p>
+            <input name="ingredient" type="text" value={createRecipe.ingredient} onChange={this.HandleChange} />
+            <p>Instructions:</p>
+            <input name="how_to_make" type="text" value={createRecipe.how_to_make} onChange={this.HandleChange} />
+            <p>Image:</p>
+            <input name="image" type="text" value={createRecipe.Image} onChange={this.HandleChange} />
+            <br />
+            <button>Create!</button>
+          </div>
         </form>
       </div>
     );
   }
 }
+

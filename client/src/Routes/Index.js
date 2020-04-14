@@ -72,7 +72,7 @@ export default class Index extends Component {
           <Route
             exact
             path="/recipes/Createrecipe"
-            render={props => <Createrecipe {...props} />}
+            render={props => <Createrecipe {...props} currentUser={currentUser} />}
           />
           <Route
             exact

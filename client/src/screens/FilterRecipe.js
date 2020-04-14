@@ -14,7 +14,6 @@ export default class FilterRecipe extends Component {
   async componentDidMount() {
     const recipe = await showRecipe()
     this.setState({ recipe })
-    // this.renderRecipe
   }
 
   createRecipeButton = () => {
@@ -24,27 +23,12 @@ export default class FilterRecipe extends Component {
     )
   }
 
-
-  // filtering = () => {
-  //   const { recipe } = this.state
-  //   if (recipe) {
-  //     return (
-  //       filter(recipe, this.props.match.params.catagories)
-  //         .map(filtered => {
-  //           return < Recipecard name={filtered.name} image={filtered.image} catagories={filtered.catagories} />
-  //         })
-  //     )
-  //   } else { console.log("loading") }
-  // }
-
   renderRecipe = () => {
     const { recipe } = this.state
     const { history, match } = this.props
     if (recipe) {
       const filtered = filter(recipe, this.props.match.params.catagories)
-      console.log(filtered)
       return filtered.map(recipe => {
-        console.log(recipe)
         return (
           <div onClick={() => history.push(`recipes/${recipe.id}`)} style={{ cursor: "pointer" }}>
             <div className="Cards">
@@ -61,7 +45,6 @@ export default class FilterRecipe extends Component {
     return (
       <div>
         <FilterNav />
-        {/* {this.filtering()} */}
         <div className='Card_Container'>
           {this.renderRecipe()}
           {this.createRecipeButton()}

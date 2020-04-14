@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { showcomments, postcomment, destroycomment } from "../services/api-helper"
-// import Destorycomment from "./Destorycomment"
 import Createcomment from "./Createcomment"
-import { MdDeleteForever } from 'react-icons/md';
+
 
 export default class Commentcontainer extends Component {
   constructor(props) {
@@ -16,31 +15,7 @@ export default class Commentcontainer extends Component {
       comment: "",
       deletedComment: false
     }
-    console.log(this.props)
-
   }
-
-  // async componentDidMount() {
-  //   console.log(this.props.id)
-  //   const comment = await showcomments(this.props.id);
-  //   console.log(comment)
-  //   this.setState({ comment })
-  //   console.log(this.state.comment.id)
-  // }
-
-  // destroy = (comment_id) => {
-
-  //   return (
-
-  //     <button onClick={async () => {
-
-  //       await destroycomment(this.props.id, comment_id)
-  //       this.setState({ deleted: true, })
-  //     }} style={{ borderRadius: "5px" }}>
-  //       <MdDeleteForever style={{ fontSize: "20px" }} /></button>
-
-  //   )
-  // }
 
   getComments = () => {
     const { comment } = this.props
@@ -52,7 +27,6 @@ export default class Commentcontainer extends Component {
             <div className="CommentDelete">
               <div>{comment.comment}</div>
               {this.props.destroy(comment.id)}
-              {/* <Destorycomment recipe_id={this.props.recipe_id.id} comment_id={comment.id} delete={this.state.deletedComment} destroy={this.destroy} /> */}
             </div>
           </>)
       }))
@@ -62,25 +36,7 @@ export default class Commentcontainer extends Component {
     else { return <div>Loading</div> }
   }
 
-  // handler = async (e) => {
-  //   e.preventDefault();
-  //   const newComment = await postcomment(this.props.id, this.state.createComment);
-  //   this.setState(prevState => ({
-  //     createComment: [...prevState.comment, newComment]
-  //   }))
-  // }
-  // handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   this.setState(prevState => ({
-  //     createComment: {
-  //       ...prevState.createComment,
-  //       [name]: value
-  //     }
-  //   }));
-  // }
-
   render() {
-    console.log(this.props)
     return (
       <div className="Commentcard">
         <hr />

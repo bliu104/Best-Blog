@@ -43,7 +43,6 @@ export default class EditRecipe extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state.recipe)
     putRecipe(this.state.recipe, this.props.match.params.id)
       .then(() => this.setState({ updated: true }))
       .catch(console.error);
@@ -120,14 +119,6 @@ export default class EditRecipe extends Component {
             required
             onChange={handleChange}
           />
-          {/* <label>user</label>
-          <input
-
-            value={recipe.user_id}
-            name='user_id'
-            required
-            onChange={handleChange}
-          /> */}
 
           <button type='submit' className='danger'>Submit</button>
 
