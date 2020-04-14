@@ -19,8 +19,8 @@ export default class Recipes extends Component {
     let recipes = await showRecipe()
     // recipes = filterTags(recipes, this.route_ends())
     const endpoint = this.route_ends()
-    console.log(this.props)
-    if (endpoint !== "") {
+    console.log(endpoint)
+    if (endpoint !== '') {
       recipes = filterTags(recipes, this.route_ends())
     }
     this.setState({ recipes })
@@ -84,11 +84,15 @@ export default class Recipes extends Component {
       <>
         <Filternav />
         <div>
-          <form onSubmit={this.props.handleSubmitSearch}>
-            <input type="text"
+          <form onSubmit={this.props.handleSubmitSearch} style={{ fontSize: "36px" }}>
+            Search
+            <input
+              className="SearchBar"
+              type="text"
               name='input'
               value={this.props.input}
-              onChange={this.props.handleChangeSearch} />
+              onChange={this.props.handleChangeSearch}
+            />
           </form>
         </div>
         {/* <Searchbar handleChangeSearch={this.handleChangeSearch} handleSubmitSearch={this.handleSubmitSearch} input={this.state.input} /> */}

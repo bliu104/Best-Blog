@@ -1,7 +1,7 @@
 export const filter = (array, catagories) => {
   const filteredArray = []
   array.map(recipe => {
-    if (recipe.catagories === catagories) {
+    if (recipe.catagories.toLowerCase() === catagories.toLowerCase()) {
       filteredArray.push(recipe)
     }
   })

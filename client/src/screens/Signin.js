@@ -19,7 +19,6 @@ class Signin extends Component {
 
 
   render() {
-    const { history } = this.props
     console.log(this.props)
     return (
       <div className="auth-container">
@@ -34,7 +33,7 @@ class Signin extends Component {
           <p>Password:</p>
           <input name="password" type="password" value={this.props.formData.password} onChange={this.props.handleChange} />
           <hr />
-          <button onClick={() => { return history.push(`/`) }}>Login</button>
+          <button>Login</button>
           <Link to="/Signup">Register</Link>
         </form>
       </div>
