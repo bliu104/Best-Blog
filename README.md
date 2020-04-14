@@ -47,7 +47,7 @@ Bobby Food BlogRails will use Ruby on rails as a backend server acting as the AP
 
 # Deployment
 Deployed on Surge/Heroku
-Frontend: http://bobby-food-blog-4.surge.sh/
+Frontend: http://bobby-food-blog-4.surge.sh/ <br/>
 Backend: https://bobby-food-app.herokuapp.com/users
 
 ## Items Database 
