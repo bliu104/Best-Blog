@@ -17,7 +17,6 @@ export default class Recipes extends Component {
 
   async componentDidMount() {
     let recipes = await showRecipe()
-    // recipes = filterTags(recipes, this.route_ends())
     const endpoint = this.route_ends()
     console.log(endpoint)
     if (endpoint !== '') {
@@ -66,18 +65,6 @@ export default class Recipes extends Component {
     })
   }
 
-  // handleChangeSearch = (event) => {
-  //   this.setState({ input: event.target.value })
-  // }
-
-  // handleSubmitSearch = (event) => {
-  //   event.preventDefault()
-  // }
-
-  // click = () => {
-  //   const { history } = this.props
-  //   return history.push(`/Search`)
-  // }
 
   render() {
     return (
@@ -92,11 +79,14 @@ export default class Recipes extends Component {
               name='input'
               value={this.props.input}
               onChange={this.props.handleChangeSearch}
+              style={{ marginLeft: "20px" }}
             />
           </form>
         </div>
-        {/* <Searchbar handleChangeSearch={this.handleChangeSearch} handleSubmitSearch={this.handleSubmitSearch} input={this.state.input} /> */}
-        {/* <button onClick={this.filter, this.click}>Search</button> */}
+
+        <div className="QuerySearchResults">
+          Current searching '{this.route_ends()}', {this.state.recipes.length} result(s)
+        </div>
         < div className='Card_Container' >
           {this.card()}
           {this.createRecipeButton()}

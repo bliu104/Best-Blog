@@ -14,9 +14,17 @@ export default class EditRecipe extends Component {
         ingredient: '',
         how_to_make: '',
         image: '',
-        user_id: ''
+        user_id: ""
       },
       updated: false
+    }
+
+  }
+
+  gettingUser = () => {
+    const { currentUser } = this.props
+    if (this.props.currentUser) {
+      this.setState({ user_id: currentUser })
     }
   }
 
@@ -57,7 +65,7 @@ export default class EditRecipe extends Component {
     }
 
     return (
-      <div >
+      <div className="EditContainer">
         <form onSubmit={handleSubmit} className="EditRecipe">
           <label>Name</label>
           <input
@@ -112,14 +120,14 @@ export default class EditRecipe extends Component {
             required
             onChange={handleChange}
           />
-          <label>user</label>
+          {/* <label>user</label>
           <input
 
             value={recipe.user_id}
             name='user_id'
             required
             onChange={handleChange}
-          />
+          /> */}
 
           <button type='submit' className='danger'>Submit</button>
 

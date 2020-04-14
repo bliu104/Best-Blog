@@ -37,7 +37,8 @@ export default class DestoryRecipe extends Component {
 
       <div>
         Are you sure you want to delete this item?
-        {this.destoryRecipeButton()}
+        <div>{this.destoryRecipeButton()}</div>
+
       </div>
     )
   }
