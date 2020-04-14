@@ -62,17 +62,17 @@ export default class Index extends Component {
           <Route
             exact
             path="/"
-            render={props => <Home {...props} currentUser={currentUser} />}
+            render={props => <Home {...props} currentUser={this.state.currentUser} />}
           />
           <Route
             exact
             path="/recipes"
-            render={props => <Recipes {...props} />}
+            render={props => <Recipes {...props} currentUser={currentUser} />}
           />
           <Route
             exact
             path="/recipes/Createrecipe"
-            render={props => <Createrecipe {...props} currentUser={currentUser} />}
+            render={props => <Createrecipe {...props} currentUser={this.state.currentUser} />}
           />
           <Route
             exact

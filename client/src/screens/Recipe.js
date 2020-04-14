@@ -87,8 +87,14 @@ export default class Recipe extends Component {
 
 
   deleteButton = () => {
-    const { history, match } = this.props;
-    return (<button onClick={() => history.push(`${match.url}/Delete`)} style={{ borderRadius: "5px" }} > <MdDeleteForever style={{ fontSize: "25px" }} /></ button>)
+    const { history, match, currentUser } = this.props;
+    if (currentUser !== null) {
+      return (<button onClick={() => history.push(`${match.url}/Delete`)} style={{ borderRadius: "5px" }} > <MdDeleteForever style={{ fontSize: "25px" }} /></ button>)
+    } else {
+      return (
+        <button onClick={() => history.push(`/Signin`)} style={{ borderRadius: "5px" }}> <MdDeleteForever style={{ fontSize: "25px" }} /> </ button>
+      )
+    }
   }
 
 

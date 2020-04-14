@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :update, :destroy]
-
+  before_action :authorize_request, only: [:create, :destory]
   # GET /comments
   def index
     @recipe = Recipe.find(params[:recipe_id])

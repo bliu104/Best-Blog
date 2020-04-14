@@ -30,10 +30,16 @@ export default class Recipes extends Component {
   }
 
   createRecipeButton = () => {
-    const { history, match } = this.props;
-    return (
-      <img src="https://previews.123rf.com/images/burntime555/burntime5551508/burntime555150800152/43641386-plus-circle-or-medicine-cross-flat-web-icon-or-sign-isolated-on-grey-background.jpg" className="CreateFoodButton" onClick={() => history.push(`${match.url}/Createrecipe`)} />
-    )
+    const { history, match, currentUser } = this.props;
+    if (currentUser !== null) {
+      return (
+        <img src="https://previews.123rf.com/images/burntime555/burntime5551508/burntime555150800152/43641386-plus-circle-or-medicine-cross-flat-web-icon-or-sign-isolated-on-grey-background.jpg" className="CreateFoodButton" onClick={() => history.push(`${match.url}/Createrecipe`)} />
+      )
+    } else {
+      return (
+        <img src="https://previews.123rf.com/images/burntime555/burntime5551508/burntime555150800152/43641386-plus-circle-or-medicine-cross-flat-web-icon-or-sign-isolated-on-grey-background.jpg" className="CreateFoodButton" onClick={() => history.push(`/Signin`)} />
+      )
+    }
   }
 
   filter = () => {

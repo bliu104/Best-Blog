@@ -13,10 +13,11 @@ export default class Createrecipe extends Component {
         ingredient: '',
         how_to_make: '',
         image: '',
-        user_id: 1
+        user_id: "1"
       },
       created: false
     }
+
   }
 
   handler = async (e) => {
